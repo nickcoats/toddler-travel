@@ -14,6 +14,8 @@ class Traveler
     protected $orientation;
     protected $age;
 
+    protected $introduction;
+
 
     function __construct($name)
     {
@@ -37,6 +39,12 @@ class Traveler
     }
     public function setAge($age){
         $this->age = $age;
+    }
+
+    public function introduction()
+    {
+        $intro = 'Hi, I\'m ' . $this->name . ' and I\'m going on a vacation today!';
+        return $intro;
     }
 
 }

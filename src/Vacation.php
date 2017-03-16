@@ -15,6 +15,7 @@ class Vacation
     protected $traveler;
     protected $itinerary;
 
+    protected $countries = [];
 
     function __construct(Traveler $traveler, Itinerary $itinerary)
     {
@@ -22,15 +23,29 @@ class Vacation
         $this->itinerary = $itinerary;
     }
 
+    public function traveler()
+    {
+        return $this->traveler;
+    }
+
+    public function itinerary()
+    {
+        return $this->itinerary;
+    }
 
     public function addDestination(Country $country)
     {
-        $this->itinerary->add($country);
+        $this->countries = $this->itinerary->add($country);
     }
 
     public function removeDestination(Country $country)
     {
-        $this->itinerary->remove($country);
+        $this->countries = $this->itinerary->remove($country);
+    }
+
+    public function arrangeTransportation()
+    {
+        $this->itinerary->transportation();
     }
 
 }
