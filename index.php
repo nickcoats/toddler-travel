@@ -5,12 +5,16 @@ require 'vendor/autoload.php';
 use ToddlerTravel\Traveler;
 use ToddlerTravel\Country;
 use ToddlerTravel\Itinerary;
-use ToddlerTravel\Vacation;
-use ToddlerTravel\Format;
+use ToddlerTravel\Format\Format;
+use ToddlerTravel\Fortmat\FormatInterface;
+use ToddlerTravel\Transportation\Transport;
+use ToddlerTravel\Transportation\Car;
+use ToddlerTravel\Transportation\Plane;
+use ToddlerTravel\Transportation\Train;
 
 
 
-// Create Traveler
+// Create Traveler Object
 $mila = new Traveler('Mila');
 $mila->setOrientation('girl');
 $mila->setAge(1);
@@ -18,7 +22,12 @@ $mila->setAge(1);
 var_dump($mila->introduction());
 
 
-// Create Countries to Add to Itinerary for Vacation
+
+// Create Itinerary Object
+$itinerary = new Itinerary();
+
+
+// Create Countries to Add to Itinerary
 $usa = new Country('United States');
 $usa->setLanguage('English');
 $usa->setContinent('North America');
@@ -50,26 +59,70 @@ $japan->setPopulation(220);
 $japan->setContinent('Asia');
 
 
-// Create a Vacation and Add Some Destinations
-$vacation = new Vacation($mila, (new Itinerary));
-$vacation->addDestination($usa);
-$vacation->addDestination($canada);
-$vacation->addDestination($germany);
-$vacation->addDestination($france);
-$vacation->addDestination($japan);
+// Add Countries to itinerary object
+$itinerary->add($usa);
+$itinerary->add($canada);
+$itinerary->add($germany);
+$itinerary->add($france);
+$itinerary->add($japan);
 
-// Remove a country
-//$vacation->removeDestination($france);
 
 
 // Print out some vacation details
-$vacationDetails = new Format($vacation->traveler(), $vacation->itinerary());
-var_dump('I\'m going to ' . $vacationDetails->countryNames() . '.');
+$narrative = new Format();
+var_dump('I\'m going to ' . $narrative->countryNames($itinerary) . '.');
 
 
-// Arrange Transportation Based on Where Mila is and Going
-var_dump('I\'m traveling by:');
-$vacation->arrangeTransportation();
+// Arrange Transportation Based on Where Mila is Going
+$countries = $itinerary->countries();
+
+if (sizeOf($countries) > 0)
+{
+    if (sizeOf($countries) == 1)
+    {
+        var_dump('I am only going to 1 country.');
+    }
+
+    if (sizeOf($countries) > 1)
+    {
+
+        var_dump('I\'m traveling by:');
+
+        for ($i=0;$i < sizeOf($countries);$i++)
+        {
+            if ($countries[$i])
+            {
+                $j = $i + 1;
+                if ($i == (sizeOf($countries) - 1))
+                {
+                    $j = 0;
+                }
+
+                if ($countries[$i]->getContinent() == $countries[$j]->getContinent())
+                {
+
+                    if ($countries[$i]->getContinent() == 'North America')
+                    {
+                        $transport = new Transport();
+                        $transport->Arrange($countries[$i], $countries[$j], new Car());
+                    }
+
+                    if ($countries[$i]->getContinent() == 'Europe')
+                    {
+                        $transport = new Transport();
+                        $transport->Arrange($countries[$i], $countries[$j], new Train());                        }
+
+                }
+
+                if ($countries[$i]->getContinent() != $countries[$j]->getContinent())
+                {
+                    $transport = new Transport();
+                    $transport->Arrange($countries[$i], $countries[$j], new Plane());
+                }
+            }
+        }
+    }
+}
 
 
 var_dump('It will be a lot of fun!');

@@ -1,16 +1,22 @@
 <?php namespace ToddlerTravel;
 
-use ToddlerTravel\Transportation\Car;
-use ToddlerTravel\Transportation\Plane;
-use ToddlerTravel\Transportation\Train;
+use ToddlerTravel\Format\Format;
+use ToddlerTravel\Format\FormatInterface;
 
 /**
  * Itinerary object contains destinations for a vacation.
  */
-class Itinerary
+class Itinerary implements FormatInterface
 {
 
     protected $countries = [];
+
+    public function countries()
+    {
+        $this->finalizeDestinations();
+
+        return $this->countries;
+    }
 
     public function add(Country $country)
     {
@@ -29,13 +35,6 @@ class Itinerary
         return $this->countries;
     }
 
-    public function countries()
-    {
-        $this->finalizeDestinations();
-
-        return $this->countries;
-    }
-
     public function finalizeDestinations()
     {
         $finalDestinations = [];
@@ -49,52 +48,6 @@ class Itinerary
         }
 
         $this->countries = $finalizeDestinations;
-    }
-
-    public function transportation()
-    {
-
-        $this->finalizeDestinations();
-
-        if (sizeOf($this->countries) > 1)
-        {
-            for ($i=0;$i < sizeOf($this->countries);$i++)
-            {
-                if ($this->countries[$i])
-                {
-                    $j = $i + 1;
-                    if ($i == (sizeOf($this->countries) - 1))
-                    {
-                        $j = 0;
-                    }
-
-                    if ($this->countries[$i]->getContinent() == $this->countries[$j]->getContinent())
-                    {
-
-                        if ($this->countries[$i]->getContinent() == 'North America')
-                        {
-                            $transport = new Car();
-                            $transport->ride($this->countries[$i], $this->countries[$j]);
-                        }
-
-                        if ($this->countries[$i]->getContinent() == 'Europe')
-                        {
-                            $transport = new Train();
-                            $transport->ride($this->countries[$i], $this->countries[$j]);
-                        }
-
-                    }
-
-                    if ($this->countries[$i]->getContinent() != $this->countries[$j]->getContinent())
-                    {
-                        $transport = new Plane();
-                        $transport->ride($this->countries[$i], $this->countries[$j]);
-                    }
-                }
-            }
-
-            return;
-        }
     }
 
 }

@@ -2,7 +2,7 @@
 
 use ToddlerTravel\Country;
 
-interface Transportation
+interface TransportationInterface
 {
     public function Ride(Country $depart, Country $arrive);
 }

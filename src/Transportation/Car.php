@@ -5,11 +5,11 @@ use ToddlerTravel\Country;
 /**
  * Plane Ride Class
  */
-class Car implements Transportation
+class Car implements TransportationInterface
 {
 
-    public function Ride(Country $depart, Country $arrive)
+    public function ride(Country $depart, Country $arrive)
     {
-        var_dump("- car from " . $depart->getName() . " to " . $arrive->getName());
+        return "- car from " . $depart->getName() . " to " . $arrive->getName();
     }
 }

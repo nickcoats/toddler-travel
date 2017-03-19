@@ -1,22 +1,17 @@
-<?php namespace ToddlerTravel;
+<?php namespace ToddlerTravel\Format;
 
 
 /**
  * Itinerary object contains destinations for a vacation.
  */
-class Format extends Vacation
+class Format
 {
 
-    public function __construct(Traveler $traveler, Itinerary $itinerary) {
-        parent::__construct($traveler, $itinerary);
-    }
-
-
-    public function countryNames()
+    public function countryNames(FormatInterface $object)
     {
         $countryNames = [];
 
-        foreach ($this->itinerary->countries() as $country)
+        foreach ($object->countries() as $country)
         {
             if ($country)
             {
