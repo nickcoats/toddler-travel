@@ -10,6 +10,6 @@ class Car implements TransportationInterface
 
     public function ride(Country $depart, Country $arrive)
     {
-        return "- car from " . $depart->getName() . " to " . $arrive->getName();
+        return "Car from " . $depart->getName() . " to " . $arrive->getName();
     }
 }

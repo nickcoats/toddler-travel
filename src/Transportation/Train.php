@@ -10,6 +10,6 @@ class Train implements TransportationInterface
 
     public function ride(Country $depart, Country $arrive)
     {
-        return "- train from " . $depart->getName() . " to " . $arrive->getName();
+        return "Train from " . $depart->getName() . " to " . $arrive->getName();
     }
 }

@@ -1,7 +1,11 @@
 {
+    "require": {
+        "rmccue/requests": ">=1.0"
+    },
     "autoload": {
         "psr-4": {
-            "ToddlerTravel\\": "src"
+            "ToddlerTravel\\": "src",
+            "Requests\\": "vendor/rmccue/requests"
         }
     }
 }

@@ -8,8 +8,8 @@ use ToddlerTravel\Country;
 class Transport
 {
 
-    public function Arrange(Country $depart, Country $arrive, TransportationInterface $travel)
+    public function arrange(Country $depart, Country $arrive, TransportationInterface $travel)
     {
-        var_dump($travel->ride($depart, $arrive));
+        return $travel->ride($depart, $arrive);
     }
 }

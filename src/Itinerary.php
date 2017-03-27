@@ -1,12 +1,13 @@
 <?php namespace ToddlerTravel;
 
-use ToddlerTravel\Format\Format;
-use ToddlerTravel\Format\FormatInterface;
+use ToddlerTravel\Country;
+use ToddlerTravel\Narrative\Narrative;
+use ToddlerTravel\Narrative\NarrativeInterface;
 
 /**
  * Itinerary object contains destinations for a vacation.
  */
-class Itinerary implements FormatInterface
+class Itinerary implements NarrativeInterface
 {
 
     protected $countries = [];
@@ -48,6 +49,21 @@ class Itinerary implements FormatInterface
         }
 
         $this->countries = $finalizeDestinations;
+    }
+
+    public function addCountries($countries)
+    {
+        foreach ($countries as $country)
+        {
+            $destination = new Country($country->name);
+            $destination->setID($country->id);
+            $destination->setLanguage($country->language);
+            $destination->setCapital($country->capital);
+            $destination->setPopulation($country->population);
+            $destination->setContinent($country->continent);
+
+            $this->add($destination);
+        }
     }
 
 }

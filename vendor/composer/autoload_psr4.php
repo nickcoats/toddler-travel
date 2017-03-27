@@ -7,4 +7,5 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'ToddlerTravel\\' => array($baseDir . '/src'),
+    'Requests\\' => array($vendorDir . '/rmccue/requests'),
 );

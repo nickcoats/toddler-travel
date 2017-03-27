@@ -10,6 +10,6 @@ class Boat implements TransportationInterface
 
     public function ride(Country $depart, Country $arrive)
     {
-        return "- boat from " . $depart->getName() . " to " . $arrive->getName();
+        return "Boat from " . $depart->getName() . " to " . $arrive->getName();
     }
 }

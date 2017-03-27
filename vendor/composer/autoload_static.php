@@ -11,12 +11,30 @@ class ComposerStaticInitc46165ec10b82d892700b7ac0009434c
         array (
             'ToddlerTravel\\' => 14,
         ),
+        'R' => 
+        array (
+            'Requests\\' => 9,
+        ),
     );
 
     public static $prefixDirsPsr4 = array (
         'ToddlerTravel\\' => 
         array (
             0 => __DIR__ . '/../..' . '/src',
+        ),
+        'Requests\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/rmccue/requests',
+        ),
+    );
+
+    public static $prefixesPsr0 = array (
+        'R' => 
+        array (
+            'Requests' => 
+            array (
+                0 => __DIR__ . '/..' . '/rmccue/requests/library',
+            ),
         ),
     );
 
@@ -25,6 +43,7 @@ class ComposerStaticInitc46165ec10b82d892700b7ac0009434c
         return \Closure::bind(function () use ($loader) {
             $loader->prefixLengthsPsr4 = ComposerStaticInitc46165ec10b82d892700b7ac0009434c::$prefixLengthsPsr4;
             $loader->prefixDirsPsr4 = ComposerStaticInitc46165ec10b82d892700b7ac0009434c::$prefixDirsPsr4;
+            $loader->prefixesPsr0 = ComposerStaticInitc46165ec10b82d892700b7ac0009434c::$prefixesPsr0;
 
         }, null, ClassLoader::class);
     }

@@ -7,6 +7,7 @@
 class Country
 {
 
+    protected $ID;
     protected $name;
     protected $capital;
     protected $language;
@@ -18,6 +19,11 @@ class Country
         $this->name = $name;
     }
 
+
+    public function getID()
+	{
+		return $this->ID;
+	}
 
 	public function getName()
 	{
@@ -44,6 +50,11 @@ class Country
 		return $this->continent;
 	}
 
+
+    public function setID($id)
+    {
+        $this->ID = $id;
+    }
 
     public function setCapital($language)
     {

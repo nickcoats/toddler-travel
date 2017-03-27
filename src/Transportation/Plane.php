@@ -10,6 +10,6 @@ class Plane implements TransportationInterface
 
     public function ride(Country $depart, Country $arrive)
     {
-        return "- plane from " . $depart->getName() . " to " . $arrive->getName();
+        return "Plane from " . $depart->getName() . " to " . $arrive->getName();
     }
 }
